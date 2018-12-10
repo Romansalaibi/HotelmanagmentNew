@@ -1,48 +1,29 @@
 package com.company;
 
 public class Room extends Customer {
-    private String name;
-    private String SSN;
-    private String add;
-    private String number;
+   private String roomname;
+   private int price;
+   private String type;
 
-    public Room(String s, int i, String single_bed_with_a_balcony) {
-        super();
+    public Room(String roomname , int price, String type) {
+        this.roomname=roomname;
+        this.price=price;
+        this.type=type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getRoomname() {
+        return roomname;
     }
 
-    public void setSSN(String SSN) {
-        this.SSN = SSN;
+    public int getPrice() {
+        return price;
     }
 
-    public void setAdd(String add) {
-        this.add = add;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSSN() {
-        return SSN;
-    }
-
-    public String getAdd() {
-        return add;
-    }
-
-    public String getNumber() {
-        return number;
+    public String getType() {
+        return type;
     }
 
     public String toString() {
-        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%n",name,SSN,add,number);
+        return String.format("Room: %s%nPrice: %d%nType: %s",roomname,price,type);
     }
 }
