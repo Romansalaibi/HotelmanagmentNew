@@ -64,6 +64,8 @@ public class Main {
                 bookings();
             }else if(a==6) {
                 search();
+            } else if(a==7){
+                edit();
             }
 
 
@@ -185,6 +187,37 @@ public class Main {
         }catch (Exception e){
             System.out.println("unvalid");
             tabort();
+        }
+
+    }
+    protected void edit(){
+        try {
+            System.out.println("What would you like to change?");
+            System.out.println("1)  Change the room price.");
+            System.out.println("2)  Change the room name.");
+            int a = input.nextInt();
+            if (a==1){
+                for (int i = 0; i < unbookedrooms.size(); i++) {
+                    System.out.println("[" + i + "]" +  unbookedrooms.get(i));
+                    System.out.println("---------------");
+                }
+                System.out.println("Enter the room index: ");
+                int b = input.nextInt();
+                System.out.println("Enter the new room price: ");
+                unbookedrooms.get(b).setPrice(input.nextInt());
+            } else if (a == 2){
+                for (int i = 0; i < unbookedrooms.size(); i++) {
+                    System.out.println("[" + i + "]" +  unbookedrooms.get(i));
+                    System.out.println("---------------");
+                }
+                System.out.println("Enter the room index: ");
+                int c = input.nextInt();
+                System.out.println("Enter the new room name: ");
+                unbookedrooms.get(c).setRoomname(input.next());
+            }
+
+        }catch (Exception e){
+            System.out.println("Unvalid");
         }
 
     }
