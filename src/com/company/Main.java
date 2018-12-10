@@ -40,31 +40,37 @@ public class Main {
     }
 
     public void Menu() {
-            System.out.println("-----MENU-----");
-            System.out.println("1)  Book a room");
-            System.out.println("2)  Unbook a room");
-            System.out.println("3)  View booked rooms");
-            System.out.println("4)  View unbooked rooms");
-            System.out.println("5)  View bookings");
-            System.out.println("6)  Search for booking");
-            System.out.println("7)  Edit room");
-            System.out.println("8)  Remove a room");
-            try {
+        System.out.println("-----MENU-----");
+        System.out.println("1)  Book a room");
+        System.out.println("2)  Unbook a room");
+        System.out.println("3)  View booked rooms");
+        System.out.println("4)  View unbooked rooms");
+        System.out.println("5)  View bookings");
+        System.out.println("6)  Search for booking");
+        System.out.println("7)  Edit room");
+        System.out.println("8)  Remove a room");
+        try {
 
             int a = input.nextInt();
             if (a == 1) {
                 bookRoom();
-            }else if (a == 4){
+            }else if(a==2){
+                tabort();
+            } else if(a==3){
+                booked();
+            }else if (a == 4) {
                 unbookedrooms();
-            }
-            else if (a == 5) {
+            } else if (a == 5) {
                 bookings();
+            }else if(a==6) {
+                search();
             }
 
-        }catch (Exception e){
-                System.out.println("Unvalid");
+
+        } catch (Exception e) {
+            System.out.println("Unvalid");
             Menu();
-            }
+        }
     }
 
 
@@ -101,9 +107,10 @@ public class Main {
             bookRoom();
         }
     }
-    protected void bookings(){
+
+    protected void bookings() {
         System.out.println("_______________");
-        for (int i=0; i<cus.size();i++){
+        for (int i = 0; i < cus.size(); i++) {
             System.out.println("Room");
             System.out.println(bookedrooms.get(i));
             System.out.println("Booked by");
@@ -113,12 +120,73 @@ public class Main {
         System.out.println("_______________");
 
     }
-    protected void unbookedrooms(){
+
+    protected void unbookedrooms() {
         System.out.println("_______________");
-        for (int i=0; i<unbookedrooms.size();i++){
+        for (int i = 0; i < unbookedrooms.size(); i++) {
             System.out.println(unbookedrooms.get(i));
             System.out.println("---------------");
         }
         System.out.println("_______________");
     }
+
+    protected void search(){
+        System.out.println("_______________");
+        System.out.println("Enter the SSN of the searched customer");
+        try {
+        String a=input.next();
+        for (int i=0;i<cus.size();i++){
+            System.out.println("---------------");
+            if(a.equalsIgnoreCase(cus.get(i).getSSN())){
+                System.out.println("Room");
+                System.out.println(bookedrooms.get(i));
+                System.out.println("");
+                System.out.println("Booked by");
+                System.out.println(cus.get(i));
+                System.out.println("---------------");
+            }
+            System.out.println("_______________");
+        }
+    }catch (Exception e){
+            System.out.println("Unvalid");
+            search();
+        }
+    }
+    protected void booked(){
+        System.out.println("_______________");
+        for (int i=0;i<bookedrooms.size();i++){
+            System.out.println(bookedrooms.get(i));
+            System.out.println("---------------");
+        }
+        System.out.println("_______________");
+    }
+    protected void tabort(){
+        System.out.println("_______________");
+        for (int i = 0; i < cus.size(); i++) {
+            System.out.println("Room");
+            System.out.println("["+i+"]"+bookedrooms.get(i));
+            System.out.println();
+            System.out.println("Booked by");
+            System.out.println(cus.get(i));
+            System.out.println("---------------");
+        }
+        System.out.println("_______________");
+        try {
+            System.out.println("Choose the index of the booking");
+            int a=input.nextInt();
+            System.out.println("Confirm cancelation yes");
+            String b=input.next();
+            if(b.equalsIgnoreCase("yes")){
+                cus.remove(a);
+                unbookedrooms.add(bookedrooms.get(a));
+                bookedrooms.remove(a);
+            }
+
+        }catch (Exception e){
+            System.out.println("unvalid");
+            tabort();
+        }
+
+    }
 }
+
