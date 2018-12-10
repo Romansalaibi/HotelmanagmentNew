@@ -31,6 +31,18 @@ public class Main {
 
 
     }
+    public void Menu(){
+        System.out.println("-----MENU-----");
+        System.out.println("1)  Book a room");
+        System.out.println("2)  Unbook a room");
+        System.out.println("3)  View booked rooms" );
+        System.out.println("4)  View unbooked rooms");
+        System.out.println("5)  View bookings");
+        System.out.println("6)  Search for booking");
+        System.out.println("7)  Edit room");
+        System.out.println("8)  Remove a room");
 
+
+    }
 
 }

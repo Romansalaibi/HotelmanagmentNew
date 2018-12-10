@@ -6,6 +6,10 @@ public class Room extends Customer {
     private String add;
     private String number;
 
+    public Room(String s, int i, String single_bed_with_a_balcony) {
+        super();
+    }
+
     public void setName(String name) {
         this.name = name;
     }
