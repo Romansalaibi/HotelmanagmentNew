@@ -11,6 +11,14 @@ public class Room extends Customer {
         this.type=type;
     }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setRoomname(String roomname) {
+        this.roomname = roomname;
+    }
+
     public String getRoomname() {
         return roomname;
     }
