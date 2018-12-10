@@ -1,5 +1,7 @@
 package com.company;
 
+import jdk.jfr.Experimental;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,6 +51,7 @@ public class Main {
         System.out.println("6)  Search for booking");
         System.out.println("7)  Edit room");
         System.out.println("8)  Add a new room");
+        System.out.println("9)  Remove room");
         try {
 
             int a = input.nextInt();
@@ -68,6 +71,8 @@ public class Main {
                 edit();
             }else if (a == 8){
                 addRoom();
+            } else if (a == 9){
+                removeRoom();
             }
 
 
@@ -247,6 +252,24 @@ public class Main {
 
 
 
+    }
+    protected void removeRoom(){
+        try {
+
+            for (int i = 0; i < unbookedrooms.size(); i++) {
+                System.out.println("[" + i + "]" + unbookedrooms.get(i));
+                System.out.println("---------------");
+            }
+            System.out.println("Enter the room you would like to remove by index: ");
+            int a = input.nextInt();
+
+            unbookedrooms.remove(a);
+            System.out.println("The room has now been removed!");
+
+
+        }catch (Exception e){
+            System.out.println("Unvalid");
+        }
     }
 }
 
