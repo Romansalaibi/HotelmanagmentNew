@@ -17,7 +17,6 @@ public class Main {
         while (cont) {
             myApp.Menu();
         }
-
     }
 
     protected void allrooms() {
@@ -38,31 +37,36 @@ public class Main {
         unbookedrooms.add(new Room("401", 2000, "Double beds with a balcony"));
         unbookedrooms.add(new Room("402", 2000, "Double beds with a balcony"));
         unbookedrooms.add(new Room("403", 2000, "Double beds with a balcony"));
-
-
     }
 
     public void Menu() {
-        System.out.println("-----MENU-----");
-        System.out.println("1)  Book a room");
-        System.out.println("2)  Unbook a room");
-        System.out.println("3)  View booked rooms");
-        System.out.println("4)  View unbooked rooms");
-        System.out.println("5)  View bookings");
-        System.out.println("6)  Search for booking");
-        System.out.println("7)  Edit room");
-        System.out.println("8)  Remove a room");
-        try {
+            System.out.println("-----MENU-----");
+            System.out.println("1)  Book a room");
+            System.out.println("2)  Unbook a room");
+            System.out.println("3)  View booked rooms");
+            System.out.println("4)  View unbooked rooms");
+            System.out.println("5)  View bookings");
+            System.out.println("6)  Search for booking");
+            System.out.println("7)  Edit room");
+            System.out.println("8)  Remove a room");
+            try {
+
             int a = input.nextInt();
             if (a == 1) {
                 bookRoom();
+            }else if (a == 4){
+                unbookedrooms();
             }
-        } catch (Exception e) {
-            System.out.println("Unvalid");
-            Menu();
-        }
+            else if (a == 5) {
+                bookings();
+            }
 
+        }catch (Exception e){
+                System.out.println("Unvalid");
+            Menu();
+            }
     }
+
 
     protected void bookRoom() {
         Customer c = new Customer();
@@ -76,10 +80,6 @@ public class Main {
         System.out.println("Enter the index of the room you would like to book: ");
         try {
             int a = input.nextInt();
-
-            bookedrooms.add(unbookedrooms.get(a));
-            unbookedrooms.remove(unbookedrooms.get(a));
-
             System.out.println("Enter the name of the customer: ");
             c.setName(input.next());
             System.out.println("Enter SSN of the customer: ");
@@ -88,20 +88,37 @@ public class Main {
             c.setAdd(input.next());
             System.out.println("Enter phonenumber of the customer");
             c.setNumber(input.next());
-            System.out.println("Confirm your booking by Yes ");
+            System.out.println("Confirm booking yes");
             String s = input.next();
-            if (s.equalsIgnoreCase("Yes")) {
-                cus.add(c);
+            if (s.equalsIgnoreCase("yes")) {
                 bookedrooms.add(unbookedrooms.get(a));
-                unbookedrooms.remove(unbookedrooms.get(a));
+                unbookedrooms.remove(a);
+                cus.add(c);
                 System.out.println("The booking has been booked");
             }
-
-
         } catch (Exception e) {
-            System.out.println("Unvalid");
+            System.out.println("unvalid");
             bookRoom();
         }
+    }
+    protected void bookings(){
+        System.out.println("_______________");
+        for (int i=0; i<cus.size();i++){
+            System.out.println("Room");
+            System.out.println(bookedrooms.get(i));
+            System.out.println("Booked by");
+            System.out.println(cus.get(i));
+            System.out.println("---------------");
+        }
+        System.out.println("_______________");
 
+    }
+    protected void unbookedrooms(){
+        System.out.println("_______________");
+        for (int i=0; i<unbookedrooms.size();i++){
+            System.out.println(unbookedrooms.get(i));
+            System.out.println("---------------");
+        }
+        System.out.println("_______________");
     }
 }
