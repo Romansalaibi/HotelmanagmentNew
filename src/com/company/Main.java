@@ -48,7 +48,7 @@ public class Main {
         System.out.println("5)  View bookings");
         System.out.println("6)  Search for booking");
         System.out.println("7)  Edit room");
-        System.out.println("8)  Remove a room");
+        System.out.println("8)  Add a new room");
         try {
 
             int a = input.nextInt();
@@ -66,6 +66,8 @@ public class Main {
                 search();
             } else if(a==7){
                 edit();
+            }else if (a == 8){
+                addRoom();
             }
 
 
@@ -219,6 +221,31 @@ public class Main {
         }catch (Exception e){
             System.out.println("Unvalid");
         }
+
+    }
+    protected void addRoom() {
+        try {
+            System.out.println("Enter new room name");
+            String name = input.next();
+            System.out.println("Enter new room price");
+            int price = input.nextInt();
+            System.out.println("How many beds");
+            String beds=input.next();
+            System.out.println("How many Balconies");
+            String balcony=input.next();
+            System.out.println("Additional things?");
+            String addit=input.next();
+            String type=beds+" Beds "+balcony+" balconies "+addit;
+            unbookedrooms.add(new Room(name,price,type));
+            System.out.println("The new room has been added");
+
+
+        } catch (Exception e){
+        System.out.println("unvalid");
+        addRoom();
+        }
+
+
 
     }
 }
