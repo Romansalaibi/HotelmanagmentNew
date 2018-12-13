@@ -94,13 +94,15 @@ public class Main {
 
         System.out.println("Enter the index of the room you would like to book: ");
         try {
-            int a = input.nextInt();
+            int a = Integer.parseInt(input.nextLine());
             System.out.println("Enter the name of the customer: ");
             c.setName(input.next());
+            input.nextLine();
             System.out.println("Enter SSN of the customer: ");
             c.setSSN(input.next());
             System.out.println("Enter address of the customer: ");
             c.setAdd(input.next());
+            input.nextLine();
             System.out.println("Enter phonenumber of the customer");
             c.setNumber(input.next());
             System.out.println("Confirm booking yes");
@@ -250,8 +252,6 @@ public class Main {
         addRoom();
         }
 
-
-
     }
     protected void removeRoom(){
         try {
@@ -265,7 +265,7 @@ public class Main {
 
             unbookedrooms.remove(a);
             System.out.println("The room has now been removed!");
-
+            System.out.println("_______________");
 
         }catch (Exception e){
             System.out.println("Unvalid");
