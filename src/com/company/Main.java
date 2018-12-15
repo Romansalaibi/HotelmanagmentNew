@@ -201,6 +201,7 @@ public class Main {
     }
     protected void edit(){
         try {
+            boolean cont=true;
             System.out.println("What would you like to change?");
             System.out.println("1)  Change the room price.");
             System.out.println("2)  Change the room name.");
@@ -222,7 +223,20 @@ public class Main {
                 System.out.println("Enter the room index: ");
                 int c = input.nextInt();
                 System.out.println("Enter the new room name: ");
-                unbookedrooms.get(c).setRoomname(input.next());
+                String d=input.next();
+                int i=0;
+                while (cont){
+                    if (unbookedrooms.get(i).getRoomname().equalsIgnoreCase(d)){
+                        System.out.println("the name can't be added");
+                        cont=false;
+                    }else if(unbookedrooms.size()-1==i&&!unbookedrooms.get(i).getRoomname().equalsIgnoreCase(d)){
+                       unbookedrooms.get(c).setRoomname(d);
+                        System.out.println("added");
+                        cont=false;
+                    }
+                    i+=1;
+                }
+
             }
 
         }catch (Exception e){
@@ -232,6 +246,7 @@ public class Main {
     }
     protected void addRoom() {
         try {
+            boolean cont=true;
             System.out.println("Enter new room name");
             String name = input.next();
             System.out.println("Enter new room price");
@@ -243,13 +258,24 @@ public class Main {
             System.out.println("Additional things?");
             String addit=input.next();
             String type=beds+" Beds "+balcony+" balconies "+addit;
-            unbookedrooms.add(new Room(name,price,type));
-            System.out.println("The new room has been added");
+            int i=0;
+            while (cont){
+                if (unbookedrooms.get(i).getRoomname().equalsIgnoreCase(name)){
+                    System.out.println("the name can't be added");
+                    cont=false;
+                }else if(unbookedrooms.size()-1==i&&!unbookedrooms.get(i).getRoomname().equalsIgnoreCase(name)){
+                    unbookedrooms.add(new Room(name,price,type));
+                    System.out.println("added");
+                    cont=false;
+                }
+                i+=1;
+            }
+
 
 
         } catch (Exception e){
         System.out.println("unvalid");
-        addRoom();
+       Menu();
         }
 
     }

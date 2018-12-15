@@ -6,6 +6,7 @@ public class Customer {
     private String add;
     private String number;
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -37,6 +38,8 @@ public class Customer {
     public String getNumber() {
         return number;
     }
+
+
 
     public String toString() {
         return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%n",name,SSN,add,number);
