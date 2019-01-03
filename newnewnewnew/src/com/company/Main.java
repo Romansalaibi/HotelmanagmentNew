@@ -11,25 +11,30 @@ public class Main {
     ArrayList<Room> bookedrooms = new ArrayList<>();
     ArrayList<Customer> cus = new ArrayList<>();
     ArrayList<Customer> history = new ArrayList<>();
-    int password = 0000;
+
 
 
     public static void main(String[] args) {
+        int password = 0000;
         Scanner input=new Scanner(System.in);
         boolean cont = true;
         boolean zeft=true;
         Main myApp = new Main();
         System.out.println("------------MENU-----------");
         System.out.println("| Employee or Customer?   |");
-        System.out.println("| 1) Employee             |");
-        System.out.println("| 2) Customer             |");
+        System.out.println("| 1) Employee.            |");
+        System.out.println("| 2) Customer.            |");
         System.out.println("---------------------------");
         int a=input.nextInt();
         myApp.allrooms();
         myApp.heart();
         if(a==1) {
+            System.out.println("Enter the password: ");
+            int p = input.nextInt();
+            if (p == password) {
             while (cont) {
                 myApp.Menu();
+            }
             }
         }else if(a==2){
             while (zeft){
@@ -70,26 +75,24 @@ public class Main {
     }
 
     public void Menu() {
-                System.out.println("Enter password: ");
-                int p = input.nextInt();
-                if (p == password) {
-                    System.out.println("--------------------Menu---------------------");
-                    System.out.println("| 1)    Book a room.                        |");
-                    System.out.println("| 2)    Unbook a room.                      |");
-                    System.out.println("| 3)    View booked rooms.                  |");
-                    System.out.println("| 4)    View unbooked rooms.                |");
-                    System.out.println("| 5)    View bookings.                      |");
-                    System.out.println("| 6)    Search for booking.                 |");
-                    System.out.println("| 7)    Edit room.                          |");
-                    System.out.println("| 8)    Add a new room.                     |");
-                    System.out.println("| 9)    Remove room.                        |");
-                    System.out.println("| 10)   Add a new customer.                 |");
-                    System.out.println("| 11)   to remove customer.                 |");
-                    System.out.println("| 12)   Edit customer.                      |");
-                    System.out.println("| 13)   View all customers                  |");
-                    System.out.println("| 14) book a room through customer/room list|");
-                    System.out.println("| 15) edit a booking                        |");
-                    System.out.println("---------------------------------------------");
+
+                    System.out.println("---------------------Menu----------------------");
+                    System.out.println("| 1)    Book a room.                          |");
+                    System.out.println("| 2)    Unbook a room.                        |");
+                    System.out.println("| 3)    View booked rooms.                    |");
+                    System.out.println("| 4)    View unbooked rooms.                  |");
+                    System.out.println("| 5)    View bookings.                        |");
+                    System.out.println("| 6)    Search for booking.                   |");
+                    System.out.println("| 7)    Edit room.                            |");
+                    System.out.println("| 8)    Add a new room.                       |");
+                    System.out.println("| 9)    Remove room.                          |");
+                    System.out.println("| 10)   Add a new customer.                   |");
+                    System.out.println("| 11)   to remove customer.                   |");
+                    System.out.println("| 12)   Edit customer.                        |");
+                    System.out.println("| 13)   View all customers                    |");
+                    System.out.println("| 14)   Book a room through customer/room list|");
+                    System.out.println("| 15)   Edit a booking                        |");
+                    System.out.println("-----------------------------------------------");
 
                         int a = input.nextInt();
                         if (a == 1) {
@@ -126,7 +129,7 @@ public class Main {
 
 
                 }
-        }
+
 
 
     protected void bookRoom() {
@@ -149,14 +152,14 @@ public class Main {
             c.setAdd(input.nextLine());
             System.out.println("Enter phone number of the customer: ");
             c.setNumber(input.nextLine());
-            System.out.println("Confirm booking yes");
+            System.out.println("Confirm booking yes: ");
             String s = input.next();
             if (s.equalsIgnoreCase("yes")) {
                 bookedrooms.add(unbookedrooms.get(a));
                 unbookedrooms.remove(a);
                 cus.add(c);
                 history.add(c);
-                System.out.println("The booking has been booked");
+                System.out.println("The booking has been made!");
             }
         } catch (Exception e) {
             System.out.println("Unvalid");
@@ -232,9 +235,9 @@ public class Main {
         }
         System.out.println("_______________");
         try {
-            System.out.println("Choose the index of the booking");
+            System.out.println("Choose the index of the booking: ");
             int a = input.nextInt();
-            System.out.println("Confirm cancelation yes");
+            System.out.println("Confirm cancelation by writing yes: ");
             String b = input.next();
             if (b.equalsIgnoreCase("yes")) {
                 cus.remove(a);
@@ -278,11 +281,11 @@ public class Main {
                 int i=0;
                 while (cont){
                     if (unbookedrooms.get(i).getRoomname().equalsIgnoreCase(d)){
-                        System.out.println("the name can't be added");
+                        System.out.println("The name can't be added");
                         cont=false;
                     }else if(unbookedrooms.size()-1==i&&!unbookedrooms.get(i).getRoomname().equalsIgnoreCase(d)){
                         unbookedrooms.get(c).setRoomname(d);
-                        System.out.println("added");
+                        System.out.println("Added");
                         cont=false;
                     }
                     i+=1;
@@ -300,13 +303,13 @@ public class Main {
     protected void addRoom() {
         try {
             boolean cont=true;
-            System.out.println("Enter new room name");
+            System.out.println("Enter new room name: ");
             String name = input.next();
-            System.out.println("Enter new room price");
+            System.out.println("Enter new room price: ");
             int price = input.nextInt();
-            System.out.println("How many beds");
+            System.out.println("Enter the number of beds: ");
             String beds=input.next();
-            System.out.println("How many Balconies");
+            System.out.println("Enter the number of balconies: ");
             String balcony=input.next();
             System.out.println("Additional things?");
             String addit=input.next();
@@ -314,17 +317,17 @@ public class Main {
             int i=0;
             while (cont){
                 if (unbookedrooms.get(i).getRoomname().equalsIgnoreCase(name)){
-                    System.out.println("the name can't be added");
+                    System.out.println("The name can't be added");
                     cont=false;
                 }else if(unbookedrooms.size()-1==i&&!unbookedrooms.get(i).getRoomname().equalsIgnoreCase(name)){
                     unbookedrooms.add(new Room(name,price,type));
-                    System.out.println("added");
+                    System.out.println("Added");
                     cont=false;
                 }
                 i+=1;
             }
         } catch (Exception e){
-            System.out.println("unvalid");
+            System.out.println("Unvalid");
             Menu();
         }
 
@@ -361,14 +364,14 @@ public class Main {
             System.out.println("Enter address of the customer: ");
             c.setAdd(input.next());
             input.nextLine();
-            System.out.println("Enter phone number of the customer");
+            System.out.println("Enter phone number of the customer: ");
             c.setNumber(input.next());
             input.nextLine();
-            System.out.println("Confirm by yes");
+            System.out.println("Confirm by yes: ");
             String s = input.nextLine();
             if (s.equalsIgnoreCase("yes")) {
                 history.add(c);
-                System.out.println("The Customer has been added");
+                System.out.println("The Customer has been added!");
             }
         } catch (Exception e) {
             System.out.println("Unvalid");
@@ -381,9 +384,9 @@ public class Main {
             System.out.println("----------------");
         }
 
-        System.out.println("Choose the index of the Customer");
+        System.out.println("Choose the index of the Customer: ");
         int a = input.nextInt();
-        System.out.println("do you want to remove customer? \n Confirm yes");
+        System.out.println("Do you want to remove customer? \n Confirm yes: ");
         String b = input.next();
         if (b.equalsIgnoreCase("yes")) {
             cus.remove(a);
@@ -400,7 +403,7 @@ public class Main {
             System.out.println("1)  Change the SSN.");
             System.out.println("2)  Change the name.");
             System.out.println("3)  Change the address.");
-            System.out.println("4)  Change the phone number");
+            System.out.println("4)  Change the phone number.");
             int a = input.nextInt();
             input.nextLine();
             if (a == 1) {
@@ -412,7 +415,7 @@ public class Main {
                 int b = Integer.parseInt(input.nextLine());
                 System.out.println("Enter the new SSN: ");
                 history.get(b).setSSN(input.nextLine());
-                System.out.println("The SSN has been changed.");
+                System.out.println("The SSN has been changed!");
 
             } else if (a == 2) {
                 for (int i = 0; i < history.size(); i++) {
@@ -423,7 +426,7 @@ public class Main {
                 int q = Integer.parseInt(input.nextLine());
                 System.out.println("Enter the new name: ");
                 history.get(q).setName(input.nextLine());
-                System.out.println("The name has been changed.");
+                System.out.println("The name has been changed!");
 
             } else if (a == 3) {
                 for (int i = 0; i < history.size(); i++) {
@@ -434,7 +437,7 @@ public class Main {
                 int b = Integer.parseInt(input.nextLine());
                 System.out.println("Enter the new address: ");
                 history.get(b).setAdd(input.nextLine());
-                System.out.println("The address has been changed. ");
+                System.out.println("The address has been changed!");
             } else if (a == 4) {
                 for (int i = 0; i < history.size(); i++) {
                     System.out.println("[" + i + "]" + history.get(i));
@@ -444,7 +447,7 @@ public class Main {
                 int u = Integer.parseInt(input.nextLine());
                 System.out.println("Enter the new phone number: ");
                 history.get(u).setNumber(input.nextLine());
-                System.out.println("The phone number has been changed. ");
+                System.out.println("The phone number has been changed!");
             }
 
         } catch (Exception e) {
@@ -465,15 +468,15 @@ public class Main {
             System.out.println("----------------");
         }
         try {
-            System.out.println("choose a customer from the list by index");
+            System.out.println("Choose a customer from the list by index: ");
             int a = input.nextInt();
             for (int i = 0; i < unbookedrooms.size(); i++) {
                 System.out.println("---------------");
                 System.out.println("[" + i + "]" + unbookedrooms.get(i));
             }
-            System.out.println("Choose a room by index");
+            System.out.println("Choose a room by index: ");
             int b = input.nextInt();
-            System.out.println("Confirm by yes");
+            System.out.println("Confirm by yes: ");
             String s = input.next();
             if (s.equalsIgnoreCase("yes")) {
                 cus.add(history.get(a));
@@ -481,7 +484,7 @@ public class Main {
                 unbookedrooms.remove(b);
             }
         } catch (Exception e) {
-            System.out.println("unvalid");
+            System.out.println("Unvalid");
             genomlist();
         }
 
@@ -495,15 +498,15 @@ public class Main {
             System.out.println("Room");
             System.out.println(bookedrooms.get(i));
             System.out.println();
-            System.out.println("Booked by");
+            System.out.println("Booked by ");
             System.out.println(cus.get(i));
             System.out.println("---------------");
         }
         System.out.println("_______________");
-        System.out.println("choose index");
+        System.out.println("Choose index: ");
         int a = input.nextInt();
-        System.out.println("1: change room");
-        System.out.println("2: change customer");
+        System.out.println("1: Change room.");
+        System.out.println("2: Change customer.");
         int b = input.nextInt();
         if (b == 1) {
             for (int i = 0; i < unbookedrooms.size(); i++) {
@@ -521,13 +524,13 @@ public class Main {
 
 
         } else if (b == 2) {
-            System.out.println("1 name");
-            System.out.println("2 SSN");
-            System.out.println("3 address");
-            System.out.println("4 number");
+            System.out.println("1 Name.");
+            System.out.println("2 SSN.");
+            System.out.println("3 Address.");
+            System.out.println("4 Number.");
             int d = input.nextInt();
             if (d == 1) {
-                System.out.println("enter new name");
+                System.out.println("Enter new name: ");
                 cus.get(a).setName(input.next());
                 input.nextLine();
                 for (int i = 0; i < history.size(); i++) {
@@ -542,7 +545,7 @@ public class Main {
                 cus.remove(a);
 
             } else if (d == 2) {
-                System.out.println("enter new SSN");
+                System.out.println("Enter new SSN: ");
                 cus.get(a).setSSN(input.next());
                 input.nextLine();
                 for (int i = 0; i < history.size(); i++) {
@@ -555,7 +558,7 @@ public class Main {
                     cus.remove(a);
                 }
             } else if (d == 3) {
-                System.out.println("add new adress");
+                System.out.println("Add new adress: ");
                 cus.get(a).setAdd(input.next());
                 input.nextLine();
                 for (int i = 0; i < history.size(); i++) {
@@ -568,7 +571,7 @@ public class Main {
                     cus.remove(a);
                 }
             } else if (d == 4) {
-                System.out.println("add new number");
+                System.out.println("Add new number: ");
                 cus.get(a).setNumber(input.next());
                 input.nextLine();
                 for (int i = 0; i < history.size(); i++) {
@@ -595,8 +598,8 @@ public class Main {
                     System.out.println("1)  Change the SSN.");
                     System.out.println("2)  Change the name.");
                     System.out.println("3)  Change the address.");
-                    System.out.println("4)  Change the phone number");
-                    System.out.println("5: Return to menu");
+                    System.out.println("4)  Change the phone number.");
+                    System.out.println("5:  Return to menu.");
                     int a = Integer.parseInt(input.nextLine());
 
                     if (a == 1){
@@ -607,7 +610,7 @@ public class Main {
                                 history.get(f).setSSN(b);
                             }
                         }
-                        System.out.println("The SSN has been Changed");
+                        System.out.println("The SSN has been Changed!");
                         cusMenu();
 
                     }else if (a == 2){
@@ -629,7 +632,7 @@ public class Main {
                             cusMenu();
                         }
                     }else if (a == 4){
-                        System.out.println("Enter the new phonenumber");
+                        System.out.println("Enter the new phonenumber!");
                         String b = input.nextLine();
                         for (int f=0;f<history.size();f++){
                             if (history.get(f).getSSN().equalsIgnoreCase(s)){
@@ -641,7 +644,7 @@ public class Main {
                         cusMenu();
                     }
                 }catch (Exception e) {
-                    System.out.println("unvalid");
+                    System.out.println("Unvalid");
                     Menu();
                 }
             }
@@ -649,11 +652,11 @@ public class Main {
 
 
             } private void cusMenu() {
-        System.out.println("--------------MENU--------------");
+        System.out.println("--------------MENU---------------");
         System.out.println("| 1)    Book a room.            |");
         System.out.println("| 2)    view your booking.      |");
         System.out.println("| 3)    Edit your information.  |");
-        System.out.println("--------------------------------");
+        System.out.println("---------------------------------");
         int b = Integer.parseInt(input.nextLine());
 
         if (b == 3){
