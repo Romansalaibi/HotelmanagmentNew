@@ -1,2 +1,0 @@
-# HotelmanagmentNew
-Project

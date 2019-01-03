@@ -1,9 +1,9 @@
 package com.company;
 
-public class Room extends Customer {
-   private String roomname;
-   private int price;
-   private String type;
+public class Room extends Customer{
+    private String roomname;
+    private int price;
+    private String type;
 
     public Room(String roomname , int price, String type) {
         this.roomname=roomname;
