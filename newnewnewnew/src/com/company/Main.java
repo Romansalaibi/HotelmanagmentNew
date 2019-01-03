@@ -11,16 +11,31 @@ public class Main {
     ArrayList<Room> bookedrooms = new ArrayList<>();
     ArrayList<Customer> cus = new ArrayList<>();
     ArrayList<Customer> history = new ArrayList<>();
+    int password = 0000;
 
 
     public static void main(String[] args) {
+        Scanner input=new Scanner(System.in);
         boolean cont = true;
+        boolean zeft=true;
         Main myApp = new Main();
-
+        System.out.println("------------MENU-----------");
+        System.out.println("| Employee or Customer?   |");
+        System.out.println("| 1) Employee             |");
+        System.out.println("| 2) Customer             |");
+        System.out.println("---------------------------");
+        int a=input.nextInt();
         myApp.allrooms();
         myApp.heart();
-        while (cont) {
-            myApp.Menu();
+        if(a==1) {
+            while (cont) {
+                myApp.Menu();
+            }
+        }else if(a==2){
+            while (zeft){
+                myApp.heart();
+                myApp.cusMenu();
+            }
         }
     }
 
@@ -55,63 +70,63 @@ public class Main {
     }
 
     public void Menu() {
-        System.out.println("-----MENU-----");
-        System.out.println("1)    Book a room.");
-        System.out.println("2)    Unbook a room.");
-        System.out.println("3)    View booked rooms.");
-        System.out.println("4)    View unbooked rooms.");
-        System.out.println("5)    View bookings.");
-        System.out.println("6)    Search for booking.");
-        System.out.println("7)    Edit room.");
-        System.out.println("8)    Add a new room.");
-        System.out.println("9)    Remove room.");
-        System.out.println("10)   Add a new customer.");
-        System.out.println("11)   to remove customer.");
-        System.out.println("12)   Edit customer.");
-        System.out.println("13)   View all customers");
-        System.out.println("14) book a room through customer/room list");
-        System.out.println("15) edit a booking");
-        try {
+                System.out.println("Enter password: ");
+                int p = input.nextInt();
+                if (p == password) {
+                    System.out.println("--------------------Menu---------------------");
+                    System.out.println("| 1)    Book a room.                        |");
+                    System.out.println("| 2)    Unbook a room.                      |");
+                    System.out.println("| 3)    View booked rooms.                  |");
+                    System.out.println("| 4)    View unbooked rooms.                |");
+                    System.out.println("| 5)    View bookings.                      |");
+                    System.out.println("| 6)    Search for booking.                 |");
+                    System.out.println("| 7)    Edit room.                          |");
+                    System.out.println("| 8)    Add a new room.                     |");
+                    System.out.println("| 9)    Remove room.                        |");
+                    System.out.println("| 10)   Add a new customer.                 |");
+                    System.out.println("| 11)   to remove customer.                 |");
+                    System.out.println("| 12)   Edit customer.                      |");
+                    System.out.println("| 13)   View all customers                  |");
+                    System.out.println("| 14) book a room through customer/room list|");
+                    System.out.println("| 15) edit a booking                        |");
+                    System.out.println("---------------------------------------------");
 
-            int a = input.nextInt();
-            if (a == 1) {
-                bookRoom();
-            } else if (a == 2) {
-                tabort();
-            } else if (a == 3) {
-                booked();
-            } else if (a == 4) {
-                unbookedrooms();
-            } else if (a == 5) {
-                bookings();
-            } else if (a == 6) {
-                search();
-            } else if (a == 7) {
-                edit();
-            } else if (a == 8) {
-                addRoom();
-            } else if (a == 9) {
-                removeRoom();
-            } else if (a == 10) {
-                addcus();
-            } else if (a == 11) {
-                removecus();
-            } else if (a == 12) {
-                editcus();
-            } else if (a == 13) {
-                printcus();
-            } else if (a == 14) {
-                genomlist();
-            } else if (a == 15) {
-                editbook();
-            }
+                        int a = input.nextInt();
+                        if (a == 1) {
+                            bookRoom();
+                        } else if (a == 2) {
+                            tabort();
+                        } else if (a == 3) {
+                            booked();
+                        } else if (a == 4) {
+                            unbookedrooms();
+                        } else if (a == 5) {
+                            bookings();
+                        } else if (a == 6) {
+                            search();
+                        } else if (a == 7) {
+                            edit();
+                        } else if (a == 8) {
+                            addRoom();
+                        } else if (a == 9) {
+                            removeRoom();
+                        } else if (a == 10) {
+                            addcus();
+                        } else if (a == 11) {
+                            removecus();
+                        } else if (a == 12) {
+                            editcus();
+                        } else if (a == 13) {
+                            printcus();
+                        } else if (a == 14) {
+                            genomlist();
+                        } else if (a == 15) {
+                            editbook();
+                        }
 
 
-        } catch (Exception e) {
-            System.out.println("Unvalid");
-            Menu();
+                }
         }
-    }
 
 
     protected void bookRoom() {
@@ -569,5 +584,81 @@ public class Main {
 
             }
         }
+    } private void cuseditcus(){
+        System.out.println("Enter you SSN: ");
+        String s = input.nextLine();
+        for (int i = 0; i<history.size(); i++) {
+            if (history.get(i).getSSN().equalsIgnoreCase(s)) {
+                System.out.println(history.get(i));
+                try {
+                    System.out.println("What would you like to change?");
+                    System.out.println("1)  Change the SSN.");
+                    System.out.println("2)  Change the name.");
+                    System.out.println("3)  Change the address.");
+                    System.out.println("4)  Change the phone number");
+                    System.out.println("5: Return to menu");
+                    int a = Integer.parseInt(input.nextLine());
+
+                    if (a == 1){
+                        System.out.println("Enter the new SSN: ");
+                        String b=input.nextLine();
+                        for (int f=0;f<history.size();f++) {
+                            if (history.get(f).getSSN().equalsIgnoreCase(s)) {
+                                history.get(f).setSSN(b);
+                            }
+                        }
+                        System.out.println("The SSN has been Changed");
+                        cusMenu();
+
+                    }else if (a == 2){
+                        System.out.println("Enter the new name: ");
+                        String b = input.nextLine();
+                        for(int f = 0; f<history.size();f++){
+                            if (history.get(f).getSSN().equalsIgnoreCase(s)){
+                                history.get(f).setName(b);
+                            }
+                            cusMenu();
+                        }
+                    }else if (a == 3){
+                        System.out.println("Enter the new address: ");
+                        String b = input.nextLine();
+                        for (int f=0;f<history.size();f++){
+                            if (history.get(f).getSSN().equalsIgnoreCase(s)){
+                                history.get(f).setAdd(b);
+                            }
+                            cusMenu();
+                        }
+                    }else if (a == 4){
+                        System.out.println("Enter the new phonenumber");
+                        String b = input.nextLine();
+                        for (int f=0;f<history.size();f++){
+                            if (history.get(f).getSSN().equalsIgnoreCase(s)){
+                                history.get(f).setNumber(b);
+                            }
+                        }
+                        cusMenu();
+                    }else if(a==5){
+                        cusMenu();
+                    }
+                }catch (Exception e) {
+                    System.out.println("unvalid");
+                    Menu();
+                }
+            }
+        }
+
+
+            } private void cusMenu() {
+        System.out.println("--------------MENU--------------");
+        System.out.println("| 1)    Book a room.            |");
+        System.out.println("| 2)    view your booking.      |");
+        System.out.println("| 3)    Edit your information.  |");
+        System.out.println("--------------------------------");
+        int b = Integer.parseInt(input.nextLine());
+
+        if (b == 3){
+            cuseditcus();
+        }
     }
+
 }
