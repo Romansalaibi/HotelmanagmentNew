@@ -1,11 +1,14 @@
 package com.company;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.*;
 public class Customer {
     private String name;
     private String SSN;
     private String add;
     private String number;
-
+    private Date start;
+    private Date end;
 
     public void setName(String name) {
         this.name = name;
@@ -39,9 +42,23 @@ public class Customer {
         return number;
     }
 
+    public void setStart(Date start) {
+        this.start = start;
+    }
 
+    public Date getStart() {
+        return start;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
 
     public String toString() {
-        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%n",name,SSN,add,number);
+        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%nCheck-in date %s%nCheck-out date %s%n",name,SSN,add,number,start,end);
     }
 }

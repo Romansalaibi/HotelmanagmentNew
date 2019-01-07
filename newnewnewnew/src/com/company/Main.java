@@ -1,13 +1,16 @@
 package com.company;
 
 import jdk.jfr.Experimental;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -144,6 +147,7 @@ public class Main {
 
 
     protected void bookRoom() {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm");
         Customer c = new Customer();
         System.out.println("___________________");
         for (int i = 0; i < unbookedrooms.size(); i++) {
@@ -163,6 +167,10 @@ public class Main {
             c.setAdd(input.nextLine());
             System.out.println("Enter phone number of the customer: ");
             c.setNumber(input.nextLine());
+            System.out.println("Check in date");
+           c.setStart(sdf.parse(input.nextLine()));
+            System.out.println("Check out date");
+            c.setEnd(sdf.parse(input.nextLine()));
             System.out.println("Confirm booking yes: ");
             String s = input.next();
             if (s.equalsIgnoreCase("yes")) {
@@ -467,6 +475,7 @@ public class Main {
     }
 
     protected void printcus() {
+
         for (int a = 0; a < history.size(); a++) {
             System.out.println("[" + (a + 1) + "]" + history.get(a));
             System.out.println("----------------");
@@ -474,6 +483,7 @@ public class Main {
     }
 
     protected void genomlist() {
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH-mm");
         for (int a = 0; a < history.size(); a++) {
             System.out.println("[" + a + "]" + history.get(a));
             System.out.println("----------------");
@@ -481,6 +491,10 @@ public class Main {
         try {
             System.out.println("Choose a customer from the list by index: ");
             int a = input.nextInt();
+            System.out.println("Enter the check-in date");
+            history.get(a).setStart(sdf.parse(input.nextLine()));
+            System.out.println("Enter check-out date");
+            history.get(a).setEnd(sdf.parse(input.nextLine()));
             for (int i = 0; i < unbookedrooms.size(); i++) {
                 System.out.println("---------------");
                 System.out.println("[" + i + "]" + unbookedrooms.get(i));
