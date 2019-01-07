@@ -683,8 +683,11 @@ public class Main {
         System.out.println("| 3)    Edit your information.  |");
         System.out.println("---------------------------------");
         int b = Integer.parseInt(input.nextLine());
-
-        if (b == 3){
+        if (b == 1){
+            bookascus();
+        }else if (b == 2){
+            viewbookcus();
+        }else if (b == 3){
             cuseditcus();
         }
     }protected  void writetxt () {
@@ -714,6 +717,48 @@ public class Main {
 
         }catch (IOException e){
             e.printStackTrace();
+        }
+    }private void bookascus() {
+        System.out.println("Enter you SSN: ");
+        String s = input.nextLine();
+        int i;
+        for (i = 0; i < history.size(); i++) {
+            if (history.get(i).getSSN().equalsIgnoreCase(s)) {
+                System.out.println(history.get(i));
+            }
+        }
+        System.out.println("_______________");
+        for (int z = 0; z < unbookedrooms.size(); z++) {
+            System.out.println("[" + z + "]" + unbookedrooms.get(z));
+            System.out.println("---------------");
+        }
+        System.out.println("Select the room you would like too book by index: ");
+        int a = Integer.parseInt(input.nextLine());
+
+        System.out.println("Confirm by yes: ");
+        String y = input.next();
+
+        if (y.equalsIgnoreCase("yes")) {
+            cus.add(history.get(i));
+            bookedrooms.add(unbookedrooms.get(a));
+            unbookedrooms.remove(a);
+        }
+
+
+    }private void viewbookcus() {
+        System.out.println("Enter you SSN: ");
+        String s = input.nextLine();
+        for (int i = 0; i < history.size(); i++) {
+            if (history.get(i).getSSN().equalsIgnoreCase(s)) {
+                System.out.println(history.get(i));
+                System.out.println("Bookings: " + cus.get(i));
+            }
+
+        }
+        System.out.println("Enter '00' to go to meny");
+        int h = input.nextInt();
+        if (h == 00){
+            cusMenu();
         }
     }
 
