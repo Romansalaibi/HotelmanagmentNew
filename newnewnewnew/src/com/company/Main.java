@@ -2,7 +2,14 @@ package com.company;
 
 import jdk.jfr.Experimental;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -42,6 +49,7 @@ public class Main {
                 myApp.cusMenu();
             }
         }
+        myApp.writetxt();
     }
 
     private void heart() {
@@ -92,6 +100,7 @@ public class Main {
                     System.out.println("| 13)   View all customers                    |");
                     System.out.println("| 14)   Book a room through customer/room list|");
                     System.out.println("| 15)   Edit a booking                        |");
+                    System.out.println("| 16)   View saved text file                  |");
                     System.out.println("-----------------------------------------------");
 
                         int a = input.nextInt();
@@ -125,6 +134,8 @@ public class Main {
                             genomlist();
                         } else if (a == 15) {
                             editbook();
+                        } else if (a == 16){
+                            readtxt();
                         }
 
 
@@ -661,6 +672,34 @@ public class Main {
 
         if (b == 3){
             cuseditcus();
+        }
+    }protected  void writetxt () {
+        try {
+            Path path = Paths.get("c:/Users/Romans Alaibi/Desktop/GitProjekt/Booking.txt");
+
+            ArrayList<String> txtfile = new ArrayList<>();
+            for (int i = 0; i < bookedrooms.size(); i++) {
+                txtfile.add(i, "Booking number" + i);
+                txtfile.add(i, String.valueOf(bookedrooms.get(i)));
+            }
+
+            Files.write(path, txtfile, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Unvalid");
+        }
+    } protected void readtxt (){
+        try {
+            Path path = Paths.get("c:/Users/Romans Alaibi/Desktop/GitProjekt/Booking.txt");
+
+            List<String> txtfile  = Files.readAllLines(path);
+            for (int i=0;i<txtfile.size();i++ ){
+                System.out.println(txtfile.get(i));
+            }
+
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
