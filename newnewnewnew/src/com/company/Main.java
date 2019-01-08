@@ -1,6 +1,8 @@
 package com.company;
 
 import jdk.jfr.Experimental;
+
+import java.io.PrintWriter;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.*;
@@ -21,6 +23,7 @@ public class Main {
     ArrayList<Room> bookedrooms = new ArrayList<>();
     ArrayList<Customer> cus = new ArrayList<>();
     ArrayList<Customer> history = new ArrayList<>();
+    ArrayList<String> txtfile = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -29,6 +32,9 @@ public class Main {
         boolean cont = true;
         boolean zeft = true;
         Main myApp = new Main();
+        myApp.writetxt();
+        myApp.readtxt();
+        myApp.saveastxt();
         System.out.println("------------MENU-----------");
         System.out.println("| Employee or Customer?   |");
         System.out.println("| 1) Employee.            |");
@@ -52,6 +58,7 @@ public class Main {
             }
         }
         myApp.writetxt();
+        myApp.saveastxt();
     }
 
     private void heart() {
@@ -178,10 +185,12 @@ public class Main {
                 cus.add(c);
                 history.add(c);
                 System.out.println("The booking has been made!");
+                saveastxt();
             }
         } catch (Exception e) {
             System.out.println("Unvalid");
             bookRoom();
+
         }
     }
 
@@ -690,7 +699,7 @@ public class Main {
         System.out.println("| 2)    view your booking.      |");
         System.out.println("| 3)    Edit your information.  |");
         System.out.println("| 4)    Edit bookings           |");
-        System.out.println("| 5)   Change to employee       |");
+        System.out.println("| 5)    Change to employee      |");
         System.out.println("| 6)    Check in                |");
         System.out.println("| 7)    Check out               |");
         System.out.println("| 8)    New customer?           |");
@@ -724,7 +733,7 @@ check();
         try {
             Path path = Paths.get("c:/Users/Romans Alaibi/Desktop/GitProjekt/Booking.txt");
 
-            ArrayList<String> txtfile = new ArrayList<>();
+
             for (int i = 0; i < bookedrooms.size(); i++) {
                 txtfile.add(i, "Booking number" + i);
                 txtfile.add(i, String.valueOf(bookedrooms.get(i)));
@@ -740,7 +749,7 @@ check();
 
     protected void readtxt() {
         try {
-            Path path = Paths.get("c:/Users/Romans Alaibi/Desktop/GitProjekt/Booking.txt");
+            Path path = Paths.get("c:/Users/Romans Alaibi/Desktop/GitProjekt/HotelmanagmentNew/newnewnewnew/Booking.txt");
 
             List<String> txtfile = Files.readAllLines(path);
             for (int i = 0; i < txtfile.size(); i++) {
@@ -946,6 +955,23 @@ check();
         } catch (Exception e) {
             System.out.println("Unvalid");
             bookRoom();
+        }
+    } private void saveastxt(){
+        try
+        {
+            PrintWriter pr = new PrintWriter("booking");
+
+            for (int i=0; i<bookedrooms.size() ; i++)
+            {
+                pr.println(bookedrooms.get(i));
+                pr.println(cus.get(i));
+            }
+            pr.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("No such file exists.");
         }
     }
 
