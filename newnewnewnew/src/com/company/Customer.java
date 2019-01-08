@@ -9,7 +9,8 @@ public class Customer {
     private String number;
     private Date start;
     private Date end;
-
+    private Date checked;
+    private Date out;
     public void setName(String name) {
         this.name = name;
     }
@@ -58,7 +59,15 @@ public class Customer {
         return end;
     }
 
+    public void setChecked(Date checked) {
+        this.checked = checked;
+    }
+
+    public Date getOut() {
+        return out;
+    }
+
     public String toString() {
-        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%nCheck-in date %s%nCheck-out date %s%n",name,SSN,add,number,start,end);
+        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%nCheck-in date %s%nCheck-out date %s%nChecked in %s%nChecked out %s%n",name,SSN,add,number,start,end,checked,out);
     }
 }

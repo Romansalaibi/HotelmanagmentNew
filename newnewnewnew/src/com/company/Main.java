@@ -40,7 +40,7 @@ public class Main {
         if (a == 1) {
             System.out.println("Enter the password: ");
             int p = input.nextInt();
-            if (p == password) {
+            if (p == 0000) {
                 while (cont) {
                     myApp.Menu();
                 }
@@ -186,8 +186,10 @@ public class Main {
     }
 
     protected void bookings() {
+        try {
+
         System.out.println("_______________");
-        for (int i = 0; i < cus.size(); i++) {
+        for (int i = 0; i < bookedrooms.size(); i++) {
             System.out.println("Room");
             System.out.println(bookedrooms.get(i));
             System.out.println();
@@ -197,6 +199,8 @@ public class Main {
         }
         System.out.println("_______________");
 
+    }catch (Exception e){
+            System.out.println();}
     }
 
     protected void unbookedrooms() {
@@ -490,6 +494,7 @@ public class Main {
         try {
             System.out.println("Choose a customer from the list by index: ");
             int a = input.nextInt();
+            input.nextLine();
             System.out.println("Enter the check-in date");
             history.get(a).setStart(sdf.parse(input.nextLine()));
             System.out.println("Enter check-out date");
@@ -685,8 +690,13 @@ public class Main {
         System.out.println("| 2)    view your booking.      |");
         System.out.println("| 3)    Edit your information.  |");
         System.out.println("| 4)    Edit bookings           |");
+        System.out.println("| 5)   Change to employee       |");
+        System.out.println("| 6)    Check in                |");
+        System.out.println("| 7)    Check out               |");
+        System.out.println("| 8)    New customer?           |");
         System.out.println("---------------------------------");
-        int b = Integer.parseInt(input.nextLine());
+       int b=input.nextInt();
+       input.nextLine();
         if (b == 1) {
             bookascus();
         } else if (b == 2) {
@@ -695,6 +705,18 @@ public class Main {
             cuseditcus();
         } else if (b == 4) {
             cusedit();
+        }else if(b==5){
+            System.out.println("Enter password");
+            int a=input.nextInt();
+            if (a==0000){
+                Menu();
+            }
+        }else if(b==6){
+check();
+        }else if(b==7){
+            checkout();
+        }else if(b==8){
+            cusbook();
         }
     }
 
@@ -731,6 +753,9 @@ public class Main {
     }
 
     private void bookascus() {
+        try {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm");
         System.out.println("Enter you SSN: ");
         String s = input.nextLine();
 
@@ -742,24 +767,39 @@ public class Main {
         }
         System.out.println("Select the room you would like too book by index: ");
         int a = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter check-in date yyyy-MM-dd HH-mm");
+     Date d1=sdf.parse(input.nextLine());
+
+        System.out.println("Enter check-out date yyyy-MM-DD HH-mm");
+        Date d2=sdf.parse(input.nextLine());
 
         System.out.println("Confirm by yes: ");
         String y = input.next();
-        input.nextLine();
+   input.nextLine();
 
         if (y.equalsIgnoreCase("yes")) {
+
             for (int i = 0; i < history.size(); i++) {
                 if (history.get(i).getSSN().equalsIgnoreCase(s)) {
+                  history.get(i).setStart(d1);
+                  history.get(i).setEnd(d2);
                     cus.add(history.get(i));
+
                 }
 
             }
             bookedrooms.add(unbookedrooms.get(a));
             unbookedrooms.remove(a);
         }
+    }catch (Exception e){
+            System.out.println("Unvalid");
+        }
     }
 
     private void viewbookcus() {
+        try {
+
         System.out.println("Enter you SSN: ");
         System.out.println("----------");
         String s = input.nextLine();
@@ -767,9 +807,14 @@ public class Main {
             System.out.println("----------");
             if (cus.get(i).getSSN().equalsIgnoreCase(s)) {
                 System.out.println(bookedrooms.get(i));
+                System.out.println(cus.get(i));
+
+
             }
         }
         cusMenu();
+    }catch (Exception e){
+            System.out.println();}
     }
 
     private void cusedit() {
@@ -812,8 +857,96 @@ public class Main {
             int a = input.nextInt();
             input.nextLine();
             bookedrooms.remove(a);
-
         cusMenu();
+
+
         }
     }
+    protected void check(){
+        try {
+
+        Date d=new Date();
+        System.out.println("Enter your SSN");
+        String s=input.nextLine();
+        for (int i=0;i<bookedrooms.size();i++){
+            if (cus.get(i).getSSN().equalsIgnoreCase(s)){
+                System.out.println("["+i+"]"+bookedrooms.get(i));
+            }
+        }
+        System.out.println("Enter the index of your booking to check in");
+        int a=input.nextInt();
+        input.nextLine();
+        if(d.before(cus.get(a).getStart())){
+            System.out.println("You cant check in yet ");
+        }else {
+            cus.get(a).setChecked(d);
+            System.out.println("You checked in");
+        }
+    }catch (Exception e){
+            System.out.println();}
+    }
+    protected void checkout(){
+        try {
+
+        Date d=new Date();
+        System.out.println("Enter your SSN");
+        String s=input.nextLine();
+        for (int i=0;i<bookedrooms.size();i++){
+            if (cus.get(i).getSSN().equalsIgnoreCase(s)){
+                System.out.println("["+i+"]"+bookedrooms.get(i));
+            }
+        }
+        System.out.println("Enter the index of your booking to checkout");
+        int a=input.nextInt();
+        input.nextLine();
+        if (d.before(cus.get(a).getEnd())){
+            System.out.println("You still have time to stay in the room");
+        }else {
+            cus.remove(a);
+            unbookedrooms.add(bookedrooms.get(a));
+            bookedrooms.remove(a);
+        }
+    }catch (Exception e){
+            System.out.println();}
+    }
+    protected void cusbook(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm");
+        Customer c = new Customer();
+        System.out.println("___________________");
+        for (int i = 0; i < unbookedrooms.size(); i++) {
+            System.out.println("---------------");
+            System.out.println("[" + i + "]" + unbookedrooms.get(i));
+        }
+        System.out.println("_______________");
+
+        System.out.println("Enter the index of the room you would like to book: ");
+        try {
+            int a = Integer.parseInt(input.nextLine());
+            System.out.println("Enter the name: ");
+            c.setName(input.nextLine());
+            System.out.println("Enter SSN: ");
+            c.setSSN(input.nextLine());
+            System.out.println("Enter address: ");
+            c.setAdd(input.nextLine());
+            System.out.println("Enter phone number: ");
+            c.setNumber(input.nextLine());
+            System.out.println("Check in date");
+            c.setStart(sdf.parse(input.nextLine()));
+            System.out.println("Check out date");
+            c.setEnd(sdf.parse(input.nextLine()));
+            System.out.println("Confirm booking yes: ");
+            String s = input.next();
+            if (s.equalsIgnoreCase("yes")) {
+                bookedrooms.add(unbookedrooms.get(a));
+                unbookedrooms.remove(a);
+                cus.add(c);
+                history.add(c);
+                System.out.println("The booking has been made!");
+            }
+        } catch (Exception e) {
+            System.out.println("Unvalid");
+            bookRoom();
+        }
+    }
+
 }
