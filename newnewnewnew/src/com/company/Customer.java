@@ -63,11 +63,19 @@ public class Customer {
         this.checked = checked;
     }
 
+    public Date getChecked() {
+        return checked;
+    }
+
+    public void setOut(Date out) {
+        this.out = out;
+    }
+
     public Date getOut() {
         return out;
     }
 
     public String toString() {
-        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%nCheck-in date %s%nCheck-out date %s%nChecked in %s%nChecked out %s%n",name,SSN,add,number,start,end,checked,out);
+        return String.format("%nName: %s%nSSN: %s%nAdress: %s%nNumber: %s%n",name,SSN,add,number,start,end,checked,out);
     }
 }

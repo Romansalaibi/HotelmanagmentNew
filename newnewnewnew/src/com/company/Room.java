@@ -31,6 +31,6 @@ public class Room extends Customer{
     }
 
     public String toString() {
-        return String.format("Room: %s%nPrice: %d%nType: %s",roomname,price,type);
+        return String.format("Room: %s%nPrice: %d%nType: %s%nCheck-in date %s%nCheck-out date %s%nChecked in %s%nChecked out %s%n",roomname,price,type,getStart(),getEnd(),getChecked(),getOut());
     }
 }

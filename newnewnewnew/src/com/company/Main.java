@@ -111,6 +111,7 @@ public class Main {
         System.out.println("| 14)   Book a room through customer/room list|");
         System.out.println("| 15)   Edit a booking                        |");
         System.out.println("| 16)   View saved text file                  |");
+        System.out.println("| 17)   Go to customer menu                   |");
         System.out.println("-----------------------------------------------");
 
         int a = input.nextInt();
@@ -146,6 +147,8 @@ public class Main {
             editbook();
         } else if (a == 16) {
             readtxt();
+        }else if(a==17){
+            cusMenu();
         }
 
 
@@ -164,6 +167,7 @@ public class Main {
 
         System.out.println("Enter the index of the room you would like to book: ");
         try {
+
             int a = Integer.parseInt(input.nextLine());
             System.out.println("Enter the name of the customer: ");
             c.setName(input.nextLine());
@@ -180,6 +184,10 @@ public class Main {
             System.out.println("Confirm booking yes: ");
             String s = input.next();
             if (s.equalsIgnoreCase("yes")) {
+                unbookedrooms.get(a).setStart(c.getStart());
+                unbookedrooms.get(a).setEnd(c.getEnd());
+                unbookedrooms.get(a).setChecked(null);
+                unbookedrooms.get(a).setOut(null);
                 bookedrooms.add(unbookedrooms.get(a));
                 unbookedrooms.remove(a);
                 cus.add(c);
@@ -518,6 +526,10 @@ public class Main {
             String s = input.next();
             if (s.equalsIgnoreCase("yes")) {
                 cus.add(history.get(a));
+                unbookedrooms.get(b).setStart(history.get(a).getStart());
+                unbookedrooms.get(b).setEnd(history.get(a).getEnd());
+                unbookedrooms.get(b).setChecked(null);
+                unbookedrooms.get(b).setOut(null);
                 bookedrooms.add(unbookedrooms.get(b));
                 unbookedrooms.remove(b);
             }
@@ -887,9 +899,11 @@ check();
         input.nextLine();
         if(d.before(cus.get(a).getStart())){
             System.out.println("You cant check in yet ");
+            cusMenu();
         }else {
-            cus.get(a).setChecked(d);
+            bookedrooms.get(a).setChecked(d);
             System.out.println("You checked in");
+            cusMenu();
         }
     }catch (Exception e){
             System.out.println();}
@@ -903,6 +917,7 @@ check();
         for (int i=0;i<bookedrooms.size();i++){
             if (cus.get(i).getSSN().equalsIgnoreCase(s)){
                 System.out.println("["+i+"]"+bookedrooms.get(i));
+
             }
         }
         System.out.println("Enter the index of your booking to checkout");
@@ -910,10 +925,14 @@ check();
         input.nextLine();
         if (d.before(cus.get(a).getEnd())){
             System.out.println("You still have time to stay in the room");
+            cusMenu();
         }else {
             cus.remove(a);
             unbookedrooms.add(bookedrooms.get(a));
+            bookedrooms.get(a).setOut(d);
             bookedrooms.remove(a);
+            cusMenu();
+
         }
     }catch (Exception e){
             System.out.println();}
